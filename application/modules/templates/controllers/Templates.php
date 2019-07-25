@@ -22,4 +22,3 @@ class Templates extends MY_Controller {
         $this->load->view('templates/temp_v',$data);
     }
 }
-//test
