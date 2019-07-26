@@ -44,13 +44,19 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="<?php echo base_url('/admin/transactions'); ?>">System Management</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo base_url('/admin/currencies'); ?>">Add Currencies</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url('/admin/transactions'); ?>">Review Transactions</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url('/admin/feedback'); ?>">Review Feedbacks</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" href="<?php //echo base_url('/admin/pricing');      ?>">Pricing</a>
+                                <a class="nav-link disabled" href="<?php //echo base_url('/admin/pricing');        ?>">Pricing</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url('/home/logout'); ?>">Logout</a>
@@ -65,7 +71,7 @@
                 ?>
             </main>
         </div>
-        <footer><h2 class="text-center text-primary">IraDariNaama</h2></footer>
+        <footer><h2 class="text-center text-primary"><img src="<?php echo base_url('/img/footer-logo.png'); ?>" class="img-responsive" width="90" height="80" /></h2></footer>
     </body>
     <script type="text/javascript">
         $(document).ready(function () {

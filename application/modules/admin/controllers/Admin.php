@@ -8,8 +8,11 @@ class Admin extends MY_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->module('feedback');
+        $this->load->module('user');
         $this->load->module('security');
         $this->load->module('transactions');
+        $this->load->module('currencies');
     }
 
     function transactions() {
@@ -20,12 +23,24 @@ class Admin extends MY_Controller {
         $this->templates->admin($data);
     }
 
+    function currencies() {
+        $this->security->security_test('admin');
+        $session_data = $this->session->userdata();
+        
+        $post_data = $this->input->post();
+        if (isset($post_data['currency'])) {
+            $this->currencies->add_currency();
+        }
+        $data['currencies_data'] = $this->currencies->get('currency_id')->result_array();
+        $data['content_view'] = 'admin/add_currencies_v';
+        $this->templates->admin($data);
+    }
+
     function feedback() {
         $this->security->security_test('admin');
         $session_data = $this->session->userdata();
 
-        $this->load->module('feedback');
-        $this->load->module('user');
+
         $feedback_data = $this->feedback->get('feedback_date')->result_array();
         foreach ($feedback_data as $key => $value) {
             $query = $this->user->get_where($feedback_data[$key]['user_id'])->result_array()[0];

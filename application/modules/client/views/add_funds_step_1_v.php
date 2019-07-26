@@ -14,17 +14,16 @@
                 <?php
                 if (isset($post_data['currency'])) {
                     $currency = $post_data['currency'];
-                } else{
+                } else {
                     $currency = 'USD';
                 }
                 ?>
                 <option value="<?php echo $currency ?>" selected hidden><?php echo $currency ?></option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="ILS">ILS</option>
-                <option value="CAD">CAD</option>
-                <option value="JPY">JPY</option>
+                <?php foreach ($currencies_data as $key => $value) { ?>
+                    <?php echo '<option value="' . $currencies_data[$key]['currency_name'] . '">' . $currencies_data[$key]['currency_name'] . '</option>'; ?>
+                    <?php
+                }
+                ?>
             </select>
             <span class="text-danger"><?php echo form_error('currency'); ?></span>
         </div>

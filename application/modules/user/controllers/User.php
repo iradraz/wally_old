@@ -31,7 +31,6 @@ class User extends MY_Controller {
         $this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[user.user_email]');
         $this->form_validation->set_rules('pswd', 'Password', 'required|min_length[6]|max_length[20]');
         $this->form_validation->set_rules('pswdvrfy', 'Password Verification', 'required|matches[pswd]');
-        $post_data = $this->input->post();
 
         if ($this->form_validation->run() == FALSE) {
             $this->register();

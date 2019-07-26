@@ -8,6 +8,32 @@ class Currencies extends MY_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->module('security');
+    }
+
+    function add_currency() {
+        
+        $this->security->security_test('admin');
+
+        $this->form_validation->set_rules('currency', 'Currency', 'required|exact_length[3]|is_unique[currencies.currency_name]');
+
+        if ($this->form_validation->run() == FALSE) {
+            
+        } else {
+            $post_data = $this->input->post();
+            $data = array(
+                'currency_name' => strtoupper($post_data['currency']));
+            $this->_insert($data);
+        }
+        redirect(base_url('admin/currencies'));
+    }
+
+    function remove_currency($id) {
+        $this->security->security_test('admin');
+        $post_data = $this->input->post();
+        if (isset($post_data['delete_id'])) {
+            $this->_delete($post_data['delete_id']);
+        }
     }
 
     function get($order_by) {

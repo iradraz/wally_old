@@ -3,14 +3,14 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Mdl_currencies extends CI_Model {
+class Mdl_copythis extends CI_Model {
 
     function __construct() {
         parent::__construct();
     }
 
     function get_table() {
-        $table = "currencies";
+        $table = "test";
         return $table;
     }
 
@@ -38,7 +38,7 @@ class Mdl_currencies extends CI_Model {
 
     function get_where($id) {
         $table = $this->get_table();
-        $this->db->where('currency_id', $id);
+        $this->db->where('test_id', $id);
         $query = $this->db->get($table);
         return $query;
     }
@@ -59,13 +59,13 @@ class Mdl_currencies extends CI_Model {
 
     function _update($id, $data) {
         $table = $this->get_table();
-        $this->db->where('currency_id', $id);
+        $this->db->where('test_id', $id);
         $this->db->update($table, $data);
     }
 
     function _delete($id) {
         $table = $this->get_table();
-        $this->db->where('currency_id', $id);
+        $this->db->where('test_id', $id);
         $this->db->delete($table);
     }
 
@@ -86,10 +86,10 @@ class Mdl_currencies extends CI_Model {
 
     function get_max() {
         $table = $this->get_table();
-        $this->db->select_max('currency_id');
+        $this->db->select_max('test_id');
         $query = $this->db->get($table);
         $row = $query->row();
-        $id = $row->currency_id;
+        $id = $row->test_id;
         return $id;
     }
 

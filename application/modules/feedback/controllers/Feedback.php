@@ -10,10 +10,6 @@ class Feedback extends MY_Controller {
         parent::__construct();
     }
 
-    function index(){
-      echo 'HELLO!!!';
-    }
-
     function get($order_by) {
         $this->load->model('mdl_feedback');
         $query = $this->mdl_feedback->get($order_by);
