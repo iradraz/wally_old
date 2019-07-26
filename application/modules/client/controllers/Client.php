@@ -7,6 +7,7 @@ class Client extends MY_Controller {
         $this->load->module('security');
         $this->load->module('user');
         $this->load->module('transactions');
+        $this->load->module('currencies');
     }
 
     function feedback_post() {
@@ -59,7 +60,7 @@ class Client extends MY_Controller {
         $this->security->security_test('client');
 
         $session_data = $this->session->userdata();
-        
+
         $data['content_view'] = 'client/start_exchange_v';
         $this->templates->client($data);
     }
@@ -77,6 +78,7 @@ class Client extends MY_Controller {
         $session_data = $this->session->userdata();
         $post_data = $this->input->post();
         if ($post_data == null) {
+            $data['currencies_data'] = $this->currencies->get('currency_id')->result_array();
             $data['content_view'] = 'client/add_funds_step_1_v';
             $this->templates->client($data);
         } else {
@@ -132,21 +134,27 @@ class Client extends MY_Controller {
         $session_data = $this->session->userdata();
         $post_data = $this->input->post();
         if ($post_data['submit'] == 'back') {
+            $data['currencies_data'] = $this->currencies->get('currency_id')->result_array();
             $data['content_view'] = 'client/add_funds_step_1_v';
             $this->templates->client($data);
         } else if ($post_data['submit'] == 'submit') {
             $this->load->module('user');
             $user_data = $this->user->get_where_custom('user_id', $session_data['user_id'])->result_array();
-            $current_status = $user_data[0]['user_' . strtolower($post_data['currency'])];
-            $this->user->_update($session_data['user_id'], array('user_' . strtolower($post_data['currency']) => $current_status + $post_data['amount']));
+           // $current_status = $user_data[0]['user_' . strtolower($post_data['currency'])];
+            
+          //  $this->user->_update($session_data['user_id'], array('user_' . strtolower($post_data['currency']) => $current_status + $post_data['amount']));
+            
             $data['content_view'] = 'client/transaction_success_v';
             $data['amount'] = $post_data['amount'];
             $data['currency'] = $post_data['currency'];
+            $data['currency_id'] = $this->currencies->get_where_custom('currency_name', $data['currency'])->result_array()[0]['currency_id'];
+
             //add here insertion into log table, and add jquery ajax call in the admin review table
             $this->transactions->_insert(
                     array(
                         'user_id' => $session_data['user_id'],
-                        'currency' => $data['currency'],
+                        'currency_id' => $data['currency_id'],
+                        'action' => 'DEPOSIT',
                         'amount' => $data['amount']
                     )
             );
