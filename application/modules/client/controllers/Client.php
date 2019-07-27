@@ -46,12 +46,9 @@ class Client extends MY_Controller {
         $this->security->security_test('client');
 
         $session_data = $this->session->userdata();
-        $data['user_data'] = $this->user->get_where_custom('user_id', $session_data['user_id'])->result_array();
-        $data['transactions'] = $this->transactions->get_where_custom('user_id', $session_data['user_id'])->result_array();
-//                echo '<pre>';
-//        print_r($data['transactions']);
-//        echo '</pre>';
-//        die;
+        $data['transactions'] = $this->get_transactions()->result_array();
+        $data['currencies_summary'] = $this->get_currencies_summary()->result_array();
+
         $data['content_view'] = 'client/wallet_v';
         $this->templates->client($data);
     }
@@ -60,7 +57,8 @@ class Client extends MY_Controller {
         $this->security->security_test('client');
 
         $session_data = $this->session->userdata();
-
+        $data['currencies_summary'] = $this->get_currencies_summary()->result_array();
+        $data['available_currencies'] = $this->currencies->get('currency_id')->result_array();
         $data['content_view'] = 'client/start_exchange_v';
         $this->templates->client($data);
     }
@@ -140,10 +138,9 @@ class Client extends MY_Controller {
         } else if ($post_data['submit'] == 'submit') {
             $this->load->module('user');
             $user_data = $this->user->get_where_custom('user_id', $session_data['user_id'])->result_array();
-           // $current_status = $user_data[0]['user_' . strtolower($post_data['currency'])];
-            
-          //  $this->user->_update($session_data['user_id'], array('user_' . strtolower($post_data['currency']) => $current_status + $post_data['amount']));
-            
+            // $current_status = $user_data[0]['user_' . strtolower($post_data['currency'])];
+            //  $this->user->_update($session_data['user_id'], array('user_' . strtolower($post_data['currency']) => $current_status + $post_data['amount']));
+
             $data['content_view'] = 'client/transaction_success_v';
             $data['amount'] = $post_data['amount'];
             $data['currency'] = $post_data['currency'];
@@ -169,68 +166,25 @@ class Client extends MY_Controller {
          */
     }
 
-    function get($order_by) {
+    function get_transactions() {
+        $this->security->security_test('client');
         $this->load->model('mdl_client');
-        $query = $this->mdl_test->get($order_by);
-        return $query;
+        $session_data = $this->session->userdata();
+        $data = $this->mdl_client->join($session_data['user_id']);
+        return $data;
     }
 
-    function get_rand($order_by) {
+    function get_currencies_summary() {
+        $this->security->security_test('client');
         $this->load->model('mdl_client');
-        $query = $this->mdl_test->get_rand($order_by);
-        return $query;
-    }
-
-    function get_with_limit($limit, $offset, $order_by) {
-        $this->load->model('mdl_client');
-        $query = $this->mdl_test->get_with_limit($limit, $offset, $order_by);
-        return $query;
-    }
-
-    function get_where($id) {
-        $this->load->model('mdl_client');
-        $query = $this->mdl_test->get_where($id);
-        return $query;
-    }
-
-    function get_where_custom($col, $value) {
-        $this->load->model('mdl_client');
-        $query = $this->mdl_test->get_where_custom($col, $value);
-        return $query;
-    }
-
-    function _insert($data) {
-        $this->load->model('mdl_client');
-        $insert_id = $this->mdl_test->_insert($data);
-
-        return $insert_id;
-    }
-
-    function _update($id, $data) {
-        $this->load->model('mdl_client');
-        $this->mdl_test->_update($id, $data);
-    }
-
-    function _delete($id) {
-        $this->load->model('mdl_client');
-        $this->mdl_test->_delete($id);
-    }
-
-    function count_where($column, $value) {
-        $this->load->model('mdl_client');
-        $count = $this->mdl_test->count_where($column, $value);
-        return $count;
-    }
-
-    function get_max() {
-        $this->load->model('mdl_client');
-        $max_id = $this->mdl_test->get_max();
-        return $max_id;
+        $session_data = $this->session->userdata();
+        $data = $this->mdl_client->join_group_by($session_data['user_id']);
+        return $data;
     }
 
     function _custom_query($mysql_query) {
         $this->load->model('mdl_client');
-        $query = $this->mdl_test->_custom_query($mysql_query);
+        $query = $this->mdl_client->_custom_query($mysql_query);
         return $query;
     }
 

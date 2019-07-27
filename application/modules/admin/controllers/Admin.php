@@ -15,6 +15,14 @@ class Admin extends MY_Controller {
         $this->load->module('currencies');
     }
 
+    function fees() {
+        $this->security->security_test('admin');
+        $session_data = $this->session->userdata();
+        
+        $data['content_view'] = 'admin/fees_v';
+        $this->templates->admin($data);
+    }
+
     function transactions() {
         $this->security->security_test('admin');
         $session_data = $this->session->userdata();
@@ -26,7 +34,7 @@ class Admin extends MY_Controller {
     function currencies() {
         $this->security->security_test('admin');
         $session_data = $this->session->userdata();
-        
+
         $post_data = $this->input->post();
         if (isset($post_data['currency'])) {
             $this->currencies->add_currency();

@@ -3,7 +3,7 @@
         <div class="row justify-content-center ">
             <div class="col-10">
                 <div class="contact-image text-center">
-                    <img src="<?php echo base_url('/img/footer-logo.png'); ?>" alt="wally" style="padding-bottom: 15px;"/>
+                    <img src="<?php echo base_url('/img/footer-logo.png'); ?>" alt="wally" height="100" width="90" style="padding-bottom: 15px;"/>
                 </div>
                 <div class="card">
                     <div class="card-body">

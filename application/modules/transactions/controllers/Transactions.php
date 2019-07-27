@@ -10,8 +10,13 @@ class Transactions extends MY_Controller {
         parent::__construct();
     }
 
-    function index(){
-      echo 'HELLO!!!';
+    function test() {
+    }
+
+    function join() {
+        $this->load->model('mdl_transactions');
+        $query = $this->mdl_transactions->join(3);
+        return $query;
     }
 
     function get($order_by) {

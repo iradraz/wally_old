@@ -35,52 +35,54 @@
         <title>Wally</title>
     </head>
     <body>
-        <header class="text-info">Hello <?php echo $session_data['user_firstname']; ?></header>
+        <header class="text-info">
+            <h1><?php echo $session_data['user_firstname']; ?> Wallet</h1>
+        </header>
         <div id="wrapper" class="animate">
-                <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
-                    <span class="navbar-toggler-icon leftmenutrigger"></span>
-                    <a class="navbar-brand" href="<?php echo base_url('/home/'); ?>"><img src="<?php echo base_url('/img/footer-logo.png'); ?>" class="img-responsive" width="20" height="20" />ally</a><span class="text-white"><?php echo $session_data['user_firstname']; ?> Wallet</span> 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarText">
-                        <ul class="navbar-nav animate side-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('/'); ?>">Home
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('/client/wallet'); ?>">My Wallet</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('/client/deposit'); ?>">Deposit Funds</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('/client/exchange'); ?>">Exchange Funds</a>
-                            </li>                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('/client/withdraw'); ?>">Withdraw Funds</a>
-                            </li>
-                            <hr>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('/client/feedback'); ?>">Feedback</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('/client/settings'); ?>">Settings</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('/home/logout'); ?>">Logout</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+            <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
+                <span class="navbar-toggler-icon leftmenutrigger"></span>
+                <a class="navbar-brand" href="<?php echo base_url('/home/'); ?>"><img src="<?php echo base_url('/img/footer-logo.png'); ?>" class="img-responsive" width="20" height="20" />ally</a><span class="text-white"><?php echo $session_data['user_firstname']; ?> Wallet</span> 
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav animate side-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('/'); ?>">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('/client/wallet'); ?>">My Wallet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('/client/deposit'); ?>">Deposit Funds</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('/client/exchange'); ?>">Exchange Funds</a>
+                        </li>                            
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('/client/withdraw'); ?>">Withdraw Funds</a>
+                        </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('/client/feedback'); ?>">Feedback</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('/client/settings'); ?>">Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('/home/logout'); ?>">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
             <?php
             $this->load->view($content_view);
             ?>
         </div>
-        <footer><h2 class="text-center text-primary">IraDariNaama</h2></footer>
+        <footer><h2 class="text-center text-primary"><img src="<?php echo base_url('/img/footer-logo.png'); ?>" class="img-responsive" width="90" height="80" /></h2></footer>
     </body>
 
     <script type="text/javascript">

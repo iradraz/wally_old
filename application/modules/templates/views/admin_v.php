@@ -21,6 +21,7 @@
             }
             .animate{-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;-ms-transition:all .3s ease-in-out;transition:all .3s ease-in-out} </style>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="../jquery/table-edits.js"></script>
         <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity = "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin = "anonymous">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <title>Wally Admin Dashboard</title>
@@ -44,7 +45,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('/admin/transactions'); ?>">System Management</a>
+                                <a class="nav-link" href="<?php echo base_url('/admin/management'); ?>">System Management</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url('/admin/currencies'); ?>">Add Currencies</a>
@@ -56,7 +57,7 @@
                                 <a class="nav-link" href="<?php echo base_url('/admin/feedback'); ?>">Review Feedbacks</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" href="<?php //echo base_url('/admin/pricing');        ?>">Pricing</a>
+                                <a class="nav-link" href="<?php echo base_url('/admin/fees'); ?>">Fees</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url('/home/logout'); ?>">Logout</a>

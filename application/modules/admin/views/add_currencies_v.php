@@ -82,7 +82,7 @@ header("Content-Type: text/html; charset=UTF-8;");
 //
 //            $.ajax({
 //                type: 'POST',
-//                url: '<?php echo base_url('currencies/add_currency'); ?>',
+//                url: '<?php // echo base_url('currencies/add_currency'); ?>',
 //                data: 'currency_name=' + currency,
 //                success: function (data) {
 //                    alert("sucess");

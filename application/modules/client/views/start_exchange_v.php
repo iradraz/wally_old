@@ -1,5 +1,6 @@
 <?php $post_data = $this->input->post(); ?>
 <div class="container">
+
     <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="1"
              aria-valuemin="0" aria-valuemax="100" style="width:1%">
@@ -7,62 +8,94 @@
         </div>
     </div>
     <h3 class="text-center text-primary">Add funds into your account</h3>
-    <form action="<?php echo base_url('/client/deposit/2'); ?>" method="post">
-        <div class="form-group text-info col-md-8" style="display: inline-block;">
-            <div style="float: left;">
-                <label for="exch_from_currency">EXCHANGE FROM:</label>
-                <select name="exch_from_currency">
-                    <?php
-                    if (isset($post_data['exch_from_currency'])) {
-                        $currency = $post_data['exch_from_currency'];
-                    } else {
-                        $currency = 'USD';
-                    }
-                    ?>
-                    <option value="<?php echo $currency ?>" selected hidden><?php echo $currency ?></option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="ILS">ILS</option>
-                    <option value="CAD">CAD</option>
-                    <option value="JPY">JPY</option>
-                </select>
-                <span class="text-danger"><?php echo form_error('exch_from_currency'); ?></span>
-            </div>
-            <div style="float: right;margin-left: 50px;">
-                <label for="exch_to_currency">EXCHANGE TO(BUY):</label>
-                <select name="exch_to_currency">
-                    <?php
-                    if (isset($post_data['exch_to_currency'])) {
-                        $currency = $post_data['exch_to_currency'];
-                    } else {
-                        $currency = 'EUR';
-                    }
-                    ?>
-                    <option value="<?php echo $currency ?>" selected hidden><?php echo $currency ?></option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="ILS">ILS</option>
-                    <option value="CAD">CAD</option>
-                    <option value="JPY">JPY</option>
-                </select>
-                <span class="text-danger"><?php echo form_error('exch_to_currency'); ?></span>
-            </div>
 
-            <span style="clear: clear"></span>
-            <div class="form-group text-info col-md-12" style="margin-top: 100px">
-                <label for="amount">Amount:</label>
-                <input type="number" step="0.01" class="form-control" id="amount" min="20" value="<?php echo set_value('amount'); ?>" placeholder="Enter amount of currency to sell" name="amount">
-                <span class="text-danger"><?php echo form_error('amount'); ?></span>
-            </div>
+
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h5 class="text-center text-warning">Current Account Statement</h5>
+            <table class="table table-success">
+                <thead class="table-stiped thead-light">
+                    <tr>
+                        <?php foreach ($currencies_summary as $key => $value) { ?>
+                            <?php echo ($currencies_summary[$key]['SUM(transactions.amount)'] == 0 ? '' : '<th scope="col">' . $currencies_summary[$key]['currency_name'] . '</th>'); ?>
+                        <?php } ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php echo '<tr>'; ?>
+                    <?php foreach ($currencies_summary as $key => $value) { ?>
+                        <?php
+                        $currency = $currencies_summary[$key]['currency_name'];
+                        $fmt = new NumberFormatter("@currency=$currency", NumberFormatter::CURRENCY);
+                        $symbol = $fmt->getSymbol(NumberFormatter::CURRENCY_SYMBOL);
+                        ?>
+                        <?php echo ($currencies_summary[$key]['SUM(transactions.amount)'] == 0 ? '' : '<th scope="col">' . $symbol . ($currencies_summary[$key]['SUM(transactions.amount)'] + $currencies_summary[$key]['SUM(transactions.fee_paid)'])) . '</th>'; ?>
+                    <?php } ?>
+
+                    <?php echo '</tr>'; ?>
+                </tbody>
+            </table>
         </div>
+    </div>
+    <div class="row justify-content-center">
+        <form action="<?php echo base_url('/client/deposit/2'); ?>" method="post">
+            <div class="form-group text-warning col-md-12" style="display: inline-block;font-size:20px;font-weight: bold">
+                <div style="float: left;">
+                    <label for="exch_from_currency">EXCHANGE FROM(SELL):</label>
+                    <select name="exch_from_currency">
+                        <?php
+                        if (isset($post_data['exch_from_currency'])) {
+                            $currency = $post_data['exch_from_currency'];
+                        } else {
+                            $currency = $currencies_summary[0]['currency_name'];
+                        }
+                        ?>
+                        <option value="<?php echo $currency ?>" selected hidden><?php echo $currency ?></option>
+                        <?php foreach ($currencies_summary as $key => $value) { ?>
+                            <?php echo ($currencies_summary[$key]['SUM(transactions.amount)'] == 0 ? '' : '<option value="' . $currencies_summary[$key]['currency_name'] . '">' . $currencies_summary[$key]['currency_name'] . '</option>'); ?>
+                        <?php } ?>
 
-        <ul>
-            <div>
-                <button type="submit" class="btn btn-info" >Proceed</button>
+                    </select>
+                    <div style="position: relative">
+                        <span class="text-danger"><?php echo form_error('exch_from_currency'); ?></span>
+                        <img src="<?php echo base_url('./img/down.png'); ?>" height="70" width="70" alt="up" style="position: absolute;margin-left: 70px;">
+                    </div>
+                </div>
+                <div style="float: right;margin-left: 50px;font-size:20px;font-weight: bold">
+                    <label for="exch_to_currency">EXCHANGE TO(BUY):</label>
+                    <select name="exch_to_currency">
+                        <?php
+                        if (isset($post_data['exch_to_currency'])) {
+                            $currency = $post_data['exch_to_currency'];
+                        } else {
+                            $currency = $available_currencies[0]['currency_name'] ? $available_currencies[0]['currency_name'] : '';
+                        }
+                        ?>
+                        <option value="<?php echo $currency ?>" selected hidden><?php echo $currency ?></option>
+                        <?php foreach ($available_currencies as $key => $value) { ?>
+                            <?php echo '<option value="' . $available_currencies[$key]['currency_name'] . '">' . $available_currencies[$key]['currency_name'] . '</option>'; ?>
+                        <?php } ?>
+                    </select>
+                    <div style="position:relative">
+                        <span class="text-danger"><?php echo form_error('exch_to_currency'); ?></span>
+                        <img src="<?php echo base_url('./img/up.png'); ?>" height="70" width="70" alt="up" style="position: absolute;margin-left: 70px;">
+                    </div>
+                </div>
+
+                <span style="clear: clear"></span>
+                <div class="form-group text-warning col-md-12" style="margin-top: 150px;font-size:20px;font-weight: bold">
+
+                    <label for="amount" style="">Amount:</label>
+                    <input type="number" step="0.01" class="form-control" id="amount" min="20" value="<?php echo set_value('amount'); ?>" placeholder="Enter amount of currency to sell" name="amount">
+                    <span class="text-danger"><?php echo form_error('amount'); ?></span>
+                </div>
             </div>
-        </ul>
-    </form>
 
+            <ul>
+                <div>
+                    <button type="submit" class="btn btn-warning position-relative"  style="left:300px;">Proceed >>></button>
+                </div>
+            </ul>
+        </form>
+    </div>
 </div>
