@@ -13,12 +13,13 @@ class Admin extends MY_Controller {
         $this->load->module('security');
         $this->load->module('transactions');
         $this->load->module('currencies');
+        $this->load->module('fees');
     }
 
     function fees() {
         $this->security->security_test('admin');
         $session_data = $this->session->userdata();
-        
+
         $data['content_view'] = 'admin/fees_v';
         $this->templates->admin($data);
     }

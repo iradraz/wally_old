@@ -9,10 +9,11 @@ class Currencies extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->module('security');
+        $this->load->module('fees');
     }
 
     function add_currency() {
-        
+
         $this->security->security_test('admin');
 
         $this->form_validation->set_rules('currency', 'Currency', 'required|exact_length[3]|is_unique[currencies.currency_name]');
@@ -23,7 +24,12 @@ class Currencies extends MY_Controller {
             $post_data = $this->input->post();
             $data = array(
                 'currency_name' => strtoupper($post_data['currency']));
-            $this->_insert($data);
+            $currency_id = $this->_insert($data);
+            $this->fees->_insert(
+                    array(
+                        'currency_id' => $currency_id,
+                        'fee_rate' => 0)
+            );
         }
         redirect(base_url('admin/currencies'));
     }
