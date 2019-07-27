@@ -60,7 +60,7 @@
         to {opacity: 1}
     }
 </style>
-<div class="slideshow-container" style="text-align:center">
+<div class="slideshow-container text-warning wow tada" data-wow-duration="2.5s" style="text-align:center">
 
     <!-- Full-width images with number and caption text -->
     <div class="mySlides">

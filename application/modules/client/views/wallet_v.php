@@ -5,7 +5,7 @@ $locale = 'he-IL'; //browser or user locale
 //$symbol = $fmt->getSymbol(NumberFormatter::CURRENCY_SYMBOL);
 header("Content-Type: text/html; charset=UTF-8;");
 ?>
-<div class="container-fluid">
+<div class="container-fluid wow fadeIn" data-wow-duration="2s">
 
     <div class="row justify-content-center">
         <div class="col-3" style="min-width: 250px;">
@@ -46,6 +46,7 @@ header("Content-Type: text/html; charset=UTF-8;");
             </table>
         </div>
     </div>
+
 
     <div class="row justify-content-center">
         <div class="col-8 col-centered" >

@@ -1,12 +1,12 @@
 <?php $post_data = $this->input->post(); ?>
-<div class="container">
+<div class="container wow fadeIn" data-wow-duration="2s">
     <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="1"
              aria-valuemin="0" aria-valuemax="100" style="width:1%">
             <span class="sr-only">10% Complete</span>
         </div>
     </div>
-    <h3 class="text-center text-primary">Add funds into your account</h3>
+    <h3 class="text-center text-warning">Deposit funds into your account</h3>
     <form action="<?php echo base_url('/client/deposit/2'); ?>" method="post">
         <div class="form-group text-info col-md-8">
             <label for="currency">Select Deposit Currency:</label>

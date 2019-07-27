@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container wow fadeIn" data-wow-duration="5s">
     <h3 class="text-center text-info">Registration Form</h3>
     <form action="<?php echo base_url('/user/register_user'); ?>" method="post">
         <div class="form-group text-info col-md-6">

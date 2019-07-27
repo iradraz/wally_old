@@ -32,16 +32,21 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity = "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin = "anonymous">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="<?php echo base_url('/css/animate.css'); ?>">
+        <script src="<?php echo base_url('/jquery/wow.min.js'); ?>"></script>
+        <script>
+            new WOW().init();
+        </script>
         <title>Wally</title>
     </head>
     <body>
-        <header class="text-info">
+        <header class="text-warning wow bounceInDown" data-wow-duration="2s">
             <h1><?php echo $session_data['user_firstname']; ?> Wallet</h1>
         </header>
         <div id="wrapper" class="animate">
             <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
                 <span class="navbar-toggler-icon leftmenutrigger"></span>
-                <a class="navbar-brand" href="<?php echo base_url('/home/'); ?>"><img src="<?php echo base_url('/img/footer-logo.png'); ?>" class="img-responsive" width="20" height="20" />ally</a><span class="text-white"><?php echo $session_data['user_firstname']; ?> Wallet</span> 
+                <a class="navbar-brand" href="<?php echo base_url('/home/'); ?>"><img src="<?php echo base_url('/img/footer-logo.png'); ?>" class="img-responsive" width="20" height="20" />ally</a><span class="text-warning"><?php // echo $session_data['user_firstname']; ?> Wallet</span> 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -82,7 +87,7 @@
             $this->load->view($content_view);
             ?>
         </div>
-        <footer><h2 class="text-center text-primary"><img src="<?php echo base_url('/img/footer-logo.png'); ?>" class="img-responsive" width="90" height="80" /></h2></footer>
+        <footer><h2 class="text-center text-primary wow bounceInUp" data-wow-duration="2s"><img src="<?php echo base_url('/img/footer-logo.png'); ?>" class="img-responsive" width="90" height="80" /></h2></footer>
     </body>
 
     <script type="text/javascript">

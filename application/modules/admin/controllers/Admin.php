@@ -19,7 +19,7 @@ class Admin extends MY_Controller {
     function fees() {
         $this->security->security_test('admin');
         $session_data = $this->session->userdata();
-
+        $data['currencies_data'] = $this->currencies->_join_fees()->result_array();
         $data['content_view'] = 'admin/fees_v';
         $this->templates->admin($data);
     }

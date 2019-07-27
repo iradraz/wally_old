@@ -13,7 +13,7 @@ class Mdl_currencies extends CI_Model {
         $table = "currencies";
         return $table;
     }
-
+    
     function get($order_by) {
         $table = $this->get_table();
         $this->db->order_by($order_by);

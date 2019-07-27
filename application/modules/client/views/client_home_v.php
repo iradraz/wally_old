@@ -2,7 +2,7 @@
 <?php $session_data = $this->session->userdata(); ?>
 
 
-<div class="container-fluid">
+<div class="container-fluid wow fadeIn" data-wow-duration="2s">
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">  

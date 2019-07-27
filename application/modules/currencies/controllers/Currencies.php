@@ -34,6 +34,13 @@ class Currencies extends MY_Controller {
         redirect(base_url('admin/currencies'));
     }
 
+    function _join_fees() {
+        $this->security->security_test('admin');
+        $mysql_query = 'select currencies.currency_id, fees.fee_id, currencies.currency_name, fees.fee_rate from currencies,fees where currencies.currency_id = fees.currency_id';
+        $query = $this->_custom_query($mysql_query);
+        return $query;
+    }
+
     function remove_currency($id) {
         $this->security->security_test('admin');
         $post_data = $this->input->post();

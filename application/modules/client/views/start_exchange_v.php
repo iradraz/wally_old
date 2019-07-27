@@ -1,5 +1,5 @@
 <?php $post_data = $this->input->post(); ?>
-<div class="container">
+<div class="container wow fadeIn" data-wow-duration="2s">
 
     <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="1"
@@ -7,7 +7,7 @@
             <span class="sr-only">10% Complete</span>
         </div>
     </div>
-    <h3 class="text-center text-primary">Add funds into your account</h3>
+    <h3 class="text-center text-info">Exchange funds in your account</h3>
 
 
     <div class="row justify-content-center">
@@ -56,9 +56,9 @@
                         <?php } ?>
 
                     </select>
-                    <div style="position: relative">
+                    <div style="position: relative" class="wow rubberBand" data-wow-duration="2s" data-wow-iteration="5">
                         <span class="text-danger"><?php echo form_error('exch_from_currency'); ?></span>
-                        <img src="<?php echo base_url('./img/down.png'); ?>" height="70" width="70" alt="up" style="position: absolute;margin-left: 70px;">
+                        <img src="<?php echo base_url('./img/down.png'); ?>" height="70" width="70" alt="up"  style="position: absolute;margin-left: 70px;">
                     </div>
                 </div>
                 <div style="float: right;margin-left: 50px;font-size:20px;font-weight: bold">
@@ -78,7 +78,7 @@
                     </select>
                     <div style="position:relative">
                         <span class="text-danger"><?php echo form_error('exch_to_currency'); ?></span>
-                        <img src="<?php echo base_url('./img/up.png'); ?>" height="70" width="70" alt="up" style="position: absolute;margin-left: 70px;">
+                        <img src="<?php echo base_url('./img/up.png'); ?>" class="wow rubberBand" data-wow-duration="2.3s" data-wow-iteration="5" height="70" width="70" alt="up" style="position: absolute;margin-left: 70px;">
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
 
             <ul>
                 <div>
-                    <button type="submit" class="btn btn-warning position-relative"  style="left:300px;">Proceed >>></button>
+                    <button type="submit" class="btn btn-warning position-relative wow bounceInLeft" data-wow-duration="3s" style="left:300px;">Proceed >>></button>
                 </div>
             </ul>
         </form>
