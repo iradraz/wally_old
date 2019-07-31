@@ -170,7 +170,11 @@ class Client extends MY_Controller {
         $this->security->security_test('client');
         $this->load->model('mdl_client');
         $session_data = $this->session->userdata();
-        $data = $this->mdl_client->join($session_data['user_id']);
+        $user_id = $session_data['user_id'];
+        $query = 'select * from user,transactions,currencies where user.user_id=transactions.user_id and transactions.currency_id=currencies.currency_id and user.user_id=' . $user_id . ' order by transactions.transaction_id asc';
+        $data = $this->_custom_query($query);
+
+        // $data = $this->mdl_client->join($session_data['user_id']);
         return $data;
     }
 
@@ -178,7 +182,14 @@ class Client extends MY_Controller {
         $this->security->security_test('client');
         $this->load->model('mdl_client');
         $session_data = $this->session->userdata();
-        $data = $this->mdl_client->join_group_by($session_data['user_id']);
+        $user_id = $session_data['user_id'];
+
+        $query = 'select transactions.user_id, SUM(transactions.amount),SUM(transactions.fee_paid),currencies.currency_id,currencies.currency_name '
+        . 'from user,transactions,currencies where '
+        . 'transactions.currency_id=currencies.currency_id and transactions.user_id='.$user_id. ' '
+        . 'GROUP BY currencies.currency_name;';
+        $data = $this->_custom_query($query);
+        // $data = $this->mdl_client->join_group_by($session_data['user_id']);
         return $data;
     }
 
